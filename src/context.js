@@ -31,7 +31,7 @@ const RoomProvider = ({ children }) => {
     let rooms = formatData(items);
     // console.log(rooms);
     let featuredRoom = rooms.filter((room) => room.feature === true);
-    setState({});
+    // setState({});
   }, []);
 
   return <RoomContext.Provider value={state}>{children}</RoomContext.Provider>;
