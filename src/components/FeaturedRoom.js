@@ -1,11 +1,11 @@
 import React from "react";
 import { RoomContext } from "../context";
 import { useContext } from "react";
+import items from "../data";
 
 const FeaturedRoom = () => {
   const { name, age } = useContext(RoomContext);
-  const jsonData = require("../data.js");
-  console.log(jsonData);
+  console.log(items);
 
   return (
     <div>
