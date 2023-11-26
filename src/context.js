@@ -2,39 +2,53 @@ import React from "react";
 import items from "./data";
 import { useEffect } from "react";
 
-const RoomContext = React.createContext();
-
-const state = {
+const RoomContext = React.createContext({
   rooms: [],
   sortedRooms: [],
   featuredRoom: [],
   loading: true,
-};
+});
+
+// const state = {
+//   rooms: [],
+//   sortedRooms: [],
+//   featuredRoom: [],
+//   loading: true,
+// };
 
 const formatData = (items) => {
   let tempitems = items.map((item) => {
     let id = item.sys.id;
     let images = item.fields.images.map((image) => image.fields.file.url);
     let room = { ...item.fields, images, id };
-    console.log(id);
-    console.log(images);
-    console.log(room);
-
     return room;
   });
-  // console.log(tempitems);
+
   return tempitems;
 };
 
 const RoomProvider = ({ children }) => {
-  useEffect(() => {
-    let rooms = formatData(items);
-    // console.log(rooms);
-    let featuredRoom = rooms.filter((room) => room.feature === true);
-    // setState({});
-  }, []);
+  let rooms = formatData(items);
+  // console.log("Rooms Data is there", rooms);
+  // console.log(rooms[0]);
+  let featuredRoom = rooms.filter((room) => room.featured === true);
+  // console.log("Featured Room", featuredRoom);
 
-  return <RoomContext.Provider value={state}>{children}</RoomContext.Provider>;
+  // return {
+  //   ...state,
+  //   rooms,
+  //   sortedRooms: rooms,
+  //   featuredRoom,
+  //   loading: false,
+  // };
+
+  return (
+    <RoomContext.Provider
+      value={{ rooms, sortedRooms: rooms, featuredRoom, loading: true }}
+    >
+      {children}
+    </RoomContext.Provider>
+  );
 };
 
 const RoomConsumer = RoomContext.Consumer;
