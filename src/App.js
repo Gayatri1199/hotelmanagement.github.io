@@ -27,7 +27,7 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/rooms/:slug">
+          <Route path="/room/:slug">
             <SingleRoom />
           </Route>
           <Route>
