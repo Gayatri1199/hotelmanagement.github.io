@@ -8,7 +8,10 @@ const Room = ({ room }) => {
       <div className="featured-room">
         <div className="image-section">
           <img src={images[0]} alt="Room" />
-          <span>{name}</span>
+          <span className="name">{name}</span>
+          <span className="img-icon">
+            <i class="fa-regular fa-image"></i>
+          </span>
         </div>
         <div className="detail-section">
           <span>{size}</span>
