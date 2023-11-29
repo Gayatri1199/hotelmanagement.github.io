@@ -14,11 +14,33 @@ const Room = ({ room }) => {
           </span>
         </div>
         <div className="detail-section">
-          <span>{size}</span>
-          <p>2 King Size Bed</p>
-          <p>Up to 5 guest</p>
+          <p>
+            <span className="size">
+              <i class="fa-solid fa-crop"></i> {size} Sq ft
+            </span>
+            <span className="king-size">
+              <i class="fa-solid fa-bed"></i>2 King Size Bed
+            </span>
+          </p>
+
+          <p className="guest-size">
+            <i class="fa-solid fa-people-group"></i>Up to 5 guest
+          </p>
         </div>
-        <div className="price">{price}/per night</div>
+        <div className="price">
+          <p>
+            {" "}
+            <span>*</span>
+            {price} Rs / per night
+          </p>
+          <div className="ratings">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+        </div>
       </div>
     </Link>
   );

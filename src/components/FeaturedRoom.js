@@ -5,6 +5,7 @@ import items from "../data";
 import Room from "./Room";
 import Loading from "./Loading";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const FeaturedRoomStyle = styled.div`
   max-width: 1200px;
@@ -48,15 +49,15 @@ const FeaturedRoomStyle = styled.div`
       position: relative;
       span.name {
         display: block;
-        padding: 10px;
+        padding: 10px 10px 10px 20px;
         position: absolute;
         bottom: 0;
         width: 80%;
-        background: #000000;
+        background: #000000ab;
         color: #ffffff;
         font-size: 18px;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 2.5px;
         transition: 0.5s all ease-in-out;
         font-family: "Cardo", serif;
       }
@@ -102,6 +103,72 @@ const FeaturedRoomStyle = styled.div`
       }
     }
   }
+  .detail-section {
+    padding: 20px;
+    background: #f1efee;
+    color: #161618 !important;
+    p {
+      margin-bottom: 15px;
+      color: #8d8b8a;
+      letter-spacing: 0.55px;
+    }
+
+    .guest-size {
+      margin-bottom: 0px;
+    }
+    span {
+      display: inline-block;
+      margin-right: 20px;
+    }
+  }
+
+  .price {
+    padding: 20px;
+    color: #161618 !important;
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-family: "Cardo", serif;
+      position: relative;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.85px;
+      text-transform: capitalize;
+      color: #161618;
+      padding-left: 15px;
+
+      span {
+        position: absolute;
+        font-size: 32px;
+        left: -5px;
+        top: -4px;
+        color: #a9774e;
+      }
+    }
+
+    i {
+      color: #fec004;
+    }
+  }
+
+  .view-all-btn {
+    margin-top: 50px;
+    text-align: center;
+    a {
+      padding: 15px 60px;
+      background: #f1efee;
+      border-radius: 100px;
+      letter-spacing: 0.65px;
+      font-weight: 600;
+      transition: 0.5s all ease-in-out;
+
+      &:hover {
+        transition: 0.5s all ease-in-out;
+        color: #ffffff;
+        background: #a9774e;
+      }
+    }
+  }
 `;
 
 const FeaturedRoom = () => {
@@ -127,6 +194,9 @@ const FeaturedRoom = () => {
           })}
         </div>
       )}
+      <div className="view-all-btn">
+        <Link to={`/`}>View All</Link>
+      </div>
     </FeaturedRoomStyle>
   );
 };
