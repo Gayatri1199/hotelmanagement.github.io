@@ -74,6 +74,8 @@ position:relative;
   .react-slideshow-container {
       img{
         filter: brightness(50%);
+        display:block;
+        width:100%;
       }
 
       .nav{

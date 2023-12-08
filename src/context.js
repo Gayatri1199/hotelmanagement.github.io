@@ -9,13 +9,6 @@ const RoomContext = React.createContext({
   loading: true,
 });
 
-// const state = {
-//   rooms: [],
-//   sortedRooms: [],
-//   featuredRoom: [],
-//   loading: true,
-// };
-
 const formatData = (items) => {
   let tempitems = items.map((item) => {
     let id = item.sys.id;
@@ -27,24 +20,30 @@ const formatData = (items) => {
   return tempitems;
 };
 
+let rooms = formatData(items);
+let featuredRoom = rooms.filter((room) => room.featured === true);
+
+const getRoom = (slug) => {
+  let tempRooms = [...rooms];
+  console.log("tempRooms => ", tempRooms);
+  const room = tempRooms.find((room) => room.slug);
+  // const room = tempRooms[0];
+  console.log("room ==>", room);
+  return room;
+};
+
+getRoom();
+
 const RoomProvider = ({ children }) => {
-  let rooms = formatData(items);
-  // console.log("Rooms Data is there", rooms);
-  // console.log(rooms[0]);
-  let featuredRoom = rooms.filter((room) => room.featured === true);
-  // console.log("Featured Room", featuredRoom);
-
-  // return {
-  //   ...state,
-  //   rooms,
-  //   sortedRooms: rooms,
-  //   featuredRoom,
-  //   loading: false,
-  // };
-
   return (
     <RoomContext.Provider
-      value={{ rooms, sortedRooms: rooms, featuredRoom, loading: false }}
+      value={{
+        rooms,
+        sortedRooms: rooms,
+        featuredRoom,
+        loading: false,
+        getRoom,
+      }}
     >
       {children}
     </RoomContext.Provider>

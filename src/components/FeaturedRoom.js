@@ -40,6 +40,21 @@ const FeaturedRoomStyle = styled.div`
     gap: 25px;
     .featured-room {
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.07);
+      &:hover {
+        img {
+          transition: 0.5s all ease-in-out;
+          transform: scale(1.1);
+        }
+        .img-icon {
+          color: #ffffff;
+          background: #a9774e;
+          transition: 0.5s all ease-in-out;
+        }
+        span.name {
+          transition: 0.5s all ease-in-out;
+          width: 100%;
+        }
+      }
     }
     .image-section {
       min-height: 240px;
@@ -84,22 +99,6 @@ const FeaturedRoomStyle = styled.div`
         object-fit: cover;
         height: 240px;
         transition: 0.5s all ease-in-out;
-      }
-
-      &:hover {
-        img {
-          transition: 0.5s all ease-in-out;
-          transform: scale(1.1);
-        }
-        .img-icon {
-          color: #ffffff;
-          background: #a9774e;
-          transition: 0.5s all ease-in-out;
-        }
-        span.name {
-          transition: 0.5s all ease-in-out;
-          width: 100%;
-        }
       }
     }
   }

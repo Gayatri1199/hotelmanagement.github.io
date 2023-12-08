@@ -13,9 +13,9 @@ import About from "./pages/About";
 function App() {
   return (
     <div className="App">
-      <Nav />
       {/* <HeroBanner /> */}
       <BrowserRouter>
+        <Nav />
         <Switch>
           Hello from App
           <Route exact path="/">
