@@ -26,9 +26,9 @@ let featuredRoom = rooms.filter((room) => room.featured === true);
 const getRoom = (slug) => {
   let tempRooms = [...rooms];
   console.log("tempRooms => ", tempRooms);
-  const room = tempRooms.find((room) => room.slug);
+  const room = tempRooms.find((room) => room.slug === slug);
   // const room = tempRooms[0];
-  console.log("room ==>", room);
+  console.log("rooms==>", room);
   return room;
 };
 
