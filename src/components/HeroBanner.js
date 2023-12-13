@@ -1,6 +1,6 @@
 import React from "react";
 import "react-slideshow-image/dist/styles.css";
-import { Fade, Zoom, Slide } from "react-slideshow-image";
+import { Fade } from "react-slideshow-image";
 import styled from "styled-components";
 
 const HeroBannerStyle = styled.div`
