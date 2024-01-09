@@ -1,43 +1,18 @@
 import React from "react";
-import { RoomContext } from "../context";
-import { useContext } from "react";
-import items from "../data";
 import Room from "./Room";
-import Loading from "./Loading";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-const FeaturedRoomStyle = styled.div`
-  max-width: 1200px;
-  margin: auto;
-  margin-top: 100px;
-
-  .heading-title {
-    text-align: center;
-    font-size: 32px;
-    line-height: 40px;
-    font-family: "Carattere", cursive;
-    margin-bottom: 8px;
-    text-transform: capitalize;
-    color: #a9774e;
-    display: block;
-  }
-
-  .heading {
-    text-align: center;
-    font-family: "Cardo", serif;
-    display: block;
-    font-size: 50px;
-    line-height: 60px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0px;
-  }
-
-  .featured-section {
+const RoomListStyle = styled.div`
+  &.roomlist {
     display: flex;
-    margin-top: 50px;
+    margin: 100px 0px;
     gap: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    a {
+      text-decoration: none;
+    }
     .featured-room {
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.07);
       &:hover {
@@ -149,51 +124,23 @@ const FeaturedRoomStyle = styled.div`
       color: #fec004;
     }
   }
-
-  .view-all-btn {
-    margin-top: 50px;
-    text-align: center;
-    a {
-      padding: 15px 60px;
-      background: #f1efee;
-      border-radius: 100px;
-      letter-spacing: 0.65px;
-      font-weight: 600;
-      transition: 0.5s all ease-in-out;
-
-      &:hover {
-        transition: 0.5s all ease-in-out;
-        color: #ffffff;
-        background: #a9774e;
-      }
-    }
-  }
 `;
 
-const FeaturedRoom = () => {
-  const { featuredRoom, loading } = useContext(RoomContext);
-
-  return (
-    <FeaturedRoomStyle>
-      <span className="heading-title">Popular Rooms</span>
-      <h2 className="heading">BOTH BUSINESS & PLEASURE</h2>
-      {loading ? (
-        <div className="loading-section">
-          <Loading />
-        </div>
-      ) : (
-        <div className="featured-section">
-          {" "}
-          {featuredRoom.map((featuredRoom, index) => {
-            return <Room key={index} room={featuredRoom} />;
-          })}
-        </div>
-      )}
-      <div className="view-all-btn">
-        <Link to={`/`}>View All</Link>
+const RoomList = ({ rooms }) => {
+  if (rooms.length === 0) {
+    return (
+      <div className="empty-search">
+        <h1>NO rooms are available as per your search!!!!</h1>
       </div>
-    </FeaturedRoomStyle>
+    );
+  }
+  return (
+    <RoomListStyle className="roomlist">
+      {rooms.map((item) => {
+        return <Room key={item.id} room={item} />;
+      })}
+    </RoomListStyle>
   );
 };
 
-export default FeaturedRoom;
+export default RoomList;

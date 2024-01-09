@@ -6,6 +6,24 @@ import { Slide } from "react-slideshow-image";
 import styled from "styled-components";
 
 const SingleRoomStyle = styled.div`
+  .images-section-wrapper {
+    background: #f1efee;
+    padding: 100px;
+    margin-top: 100px;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 39%;
+      display: block;
+      background: #ffffff;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
   .herobanner {
     max-height: 450px;
     overflow: hidden;
@@ -156,24 +174,64 @@ const SingleRoomStyle = styled.div`
   }
 
   .images-section {
-    margin-top: 100px;
-    padding: 100px;
-    background: #0a0807;
+    max-width: 1172px;
+    margin: auto;
+
     display: flex;
     gap: 50px;
     position: relative;
-    .description {
-      max-width: 400px;
+    .images {
+      max-width: 540px;
       width: 100%;
-      color: #fff;
+      img {
+        margin-bottom: 20px;
+      }
+    }
+    .description {
+      max-width: calc(100% - 540px);
+      span {
+        font-size: 32px;
+        line-height: 40px;
+        font-family: "Carattere", cursive;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+        color: #a9774e;
+      }
       h2 {
-        font-size: 60px;
-        position: absolute;
-        top: 60px;
+        font-size: 40px;
+
         font-family: "Cardo", serif;
-        left: 50px;
-        z-index: 1;
+
         letter-spacing: 6px;
+      }
+
+      .content {
+        &::after {
+          content: "";
+          width: 100%;
+          display: block;
+          height: 2px;
+          background: #a9774e;
+          top: 11px;
+          position: absolute;
+          left: -90px;
+        }
+        &::first-letter {
+          font-size: 80px;
+          color: #a9774e;
+          font-family: "Cardo", serif;
+        }
+
+        max-width: 500px;
+        position: relative;
+        font-family: "Outfit", sans-serif;
+        color: #7c8083;
+        font-weight: 400;
+        margin: 0px;
+        transition: all 500ms ease;
+        line-height: 25px;
+        padding-top: 90px;
+        margin-top: 50px;
       }
 
       p {
@@ -183,13 +241,14 @@ const SingleRoomStyle = styled.div`
       }
     }
     .images {
-      max-width: 50%;
-      width: 100%;
     }
     img {
       width: 100%;
       display: block;
     }
+  }
+  .head {
+    padding-top: 20px;
   }
 `;
 
@@ -263,7 +322,7 @@ const SingleRoom = (props) => {
           </p>
           <p>
             <span>*</span>
-            In-room safe
+            {pets ? "Pets are Allowed" : "Pets are Not Allowed"}
           </p>
           <p>
             <span>*</span>
@@ -275,10 +334,7 @@ const SingleRoom = (props) => {
             <span>*</span>
             Coffee & tea making facilities
           </p>
-          <p>
-            <span>*</span>
-            Coffee & tea making facilities
-          </p>
+
           <p>
             <span>*</span>
             Mini-refrigerator
@@ -289,17 +345,19 @@ const SingleRoom = (props) => {
           </p>
         </div>
       </div>
-      <div className="images-section">
-        <div className="description">
-          <h2>STAY CLASSY, FEEL CLASSY</h2>
-          <p>{description}</p>
-        </div>
-        <div className="images">
-          <Slide>
-            {images.map((image, index) => {
-              return <img key={index} src={image} alt={name} />;
-            })}
-          </Slide>
+      <div className="images-section-wrapper">
+        <div className="images-section">
+          <div className="images">
+            <img src={images[1]} alt={name} />
+            <img src={images[2]} alt={name} />
+          </div>
+          <div className="description">
+            <div className="head">
+              <span>About</span>
+              <h2>THE WORLDS LUXURIOUS HOTEL</h2>
+            </div>
+            <div className="content">{description}</div>
+          </div>
         </div>
       </div>
     </SingleRoomStyle>

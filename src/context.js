@@ -7,6 +7,15 @@ const RoomContext = React.createContext({
   sortedRooms: [],
   featuredRoom: [],
   loading: true,
+  type: "all",
+  capacity: 1,
+  price: 0,
+  minPrice: 0,
+  maxPrice: 0,
+  maxSize: 0,
+  minSize: 0,
+  breakfast: false,
+  pets: false,
 });
 
 const formatData = (items) => {
@@ -32,7 +41,21 @@ const getRoom = (slug) => {
   return room;
 };
 
-getRoom();
+const handleChange = (event) => {
+  const target = event.target;
+  const value = event.type === "checkbox" ? target.checked : target.value;
+
+  const name = event.target.name;
+
+  filterRooms();
+};
+
+const filterRooms = () => {
+  console.log("Hello");
+};
+
+let maxPrice = Math.max(...rooms.map((item) => item.price));
+let maxSize = Math.max(...rooms.map((item) => item.size));
 
 const RoomProvider = ({ children }) => {
   return (
@@ -43,6 +66,12 @@ const RoomProvider = ({ children }) => {
         featuredRoom,
         loading: false,
         getRoom,
+        price: maxPrice,
+        maxPrice,
+        maxSize,
+        filterRooms,
+        handleChange,
+        type: handleChange,
       }}
     >
       {children}
