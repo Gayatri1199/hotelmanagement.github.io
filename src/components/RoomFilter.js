@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { RoomContext } from "../context";
 import styled from "styled-components";
 
@@ -18,7 +18,10 @@ const RoomFilter = ({ rooms }) => {
     maxSize,
     breakfast,
     pets,
+    handlePriceRange,
+    priceRange,
   } = useContext(RoomContext);
+  const [roomType, setRoomType] = useState("all");
 
   let types = getUnique(rooms, "type");
   types = ["all", ...types];
@@ -30,6 +33,8 @@ const RoomFilter = ({ rooms }) => {
       </option>
     );
   });
+  console.log({ roomType }, type);
+
   return (
     <RoomFilterStyle>
       <div className="filter-form">
@@ -39,15 +44,18 @@ const RoomFilter = ({ rooms }) => {
             <select
               name="type"
               id="type"
-              value={type}
+              value={roomType}
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) => {
+                setRoomType(e.target.value);
+                handleChange(e);
+              }}
             >
               {types}
             </select>
           </div>
           <div className="form-group ">
-            <label htmlFor="price">room price ${price}</label>
+            <label htmlFor="price">Room Price ${price}</label>
             <input
               type="range"
               name="price"
@@ -55,7 +63,7 @@ const RoomFilter = ({ rooms }) => {
               max={maxPrice}
               id="price"
               value={price}
-              onChange={handleChange}
+              onChange={handlePriceRange}
               className="price-stripe"
             />
           </div>

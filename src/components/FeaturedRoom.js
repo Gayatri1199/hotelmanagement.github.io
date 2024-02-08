@@ -190,7 +190,7 @@ const FeaturedRoom = () => {
         </div>
       )}
       <div className="view-all-btn">
-        <Link to={`/`}>View All</Link>
+        <Link to={`/rooms`}>View All</Link>
       </div>
     </FeaturedRoomStyle>
   );

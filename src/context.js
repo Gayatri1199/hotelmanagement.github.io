@@ -1,6 +1,7 @@
 import React from "react";
 import items from "./data";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const RoomContext = React.createContext({
   rooms: [],
@@ -19,14 +20,14 @@ const RoomContext = React.createContext({
 });
 
 const formatData = (items) => {
-  let tempitems = items.map((item) => {
+  let tempItems = items.map((item) => {
     let id = item.sys.id;
     let images = item.fields.images.map((image) => image.fields.file.url);
     let room = { ...item.fields, images, id };
     return room;
   });
 
-  return tempitems;
+  return tempItems;
 };
 
 let rooms = formatData(items);
@@ -34,35 +35,48 @@ let featuredRoom = rooms.filter((room) => room.featured === true);
 
 const getRoom = (slug) => {
   let tempRooms = [...rooms];
-  console.log("tempRooms => ", tempRooms);
   const room = tempRooms.find((room) => room.slug === slug);
-  // const room = tempRooms[0];
-  console.log("rooms==>", room);
   return room;
 };
 
-const handleChange = (event) => {
-  const target = event.target;
-  const value = event.type === "checkbox" ? target.checked : target.value;
-
-  const name = event.target.name;
-
-  filterRooms();
-};
-
-const filterRooms = () => {
-  console.log("Hello");
+const filterRooms = (filterData) => {
+  return rooms.filter((item) => item.type === filterData);
 };
 
 let maxPrice = Math.max(...rooms.map((item) => item.price));
+let minPrice = Math.min(...rooms.map((item) => item.price));
 let maxSize = Math.max(...rooms.map((item) => item.size));
 
 const RoomProvider = ({ children }) => {
+  const [roomsData, setRoomsData] = useState(rooms);
+  const [priceRangeFilter, setpriceRangeFilter] = useState([
+    minPrice,
+    maxPrice,
+  ]);
+  const [filteredProducts, setFilteredProducts] = useState(rooms);
+
+  const handleChange = (event) => {
+    if (event.target.value === "all") {
+      setRoomsData(rooms);
+      return;
+    }
+    const filteredRooms = filterRooms(event.target.value);
+    setRoomsData(filteredRooms);
+  };
+
+  const handlePriceRange = (value) => {
+    setpriceRangeFilter(value);
+    console.log("handlePriceRange has been called!!", priceRangeFilter);
+    console.log("Rooms from handle price function", rooms);
+    const filtered = rooms.filter((room) => room.price >= 600);
+    console.log("Handle PRice Range Filter Product == >", filtered);
+  };
+
   return (
     <RoomContext.Provider
       value={{
-        rooms,
-        sortedRooms: rooms,
+        rooms: filteredProducts ? filteredProducts : rooms,
+        sortedRooms: roomsData,
         featuredRoom,
         loading: false,
         getRoom,
@@ -72,6 +86,9 @@ const RoomProvider = ({ children }) => {
         filterRooms,
         handleChange,
         type: handleChange,
+        handlePriceRange,
+        setpriceRangeFilter,
+        priceRangeFilter,
       }}
     >
       {children}

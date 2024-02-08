@@ -5,16 +5,23 @@ import styled from "styled-components";
 const RoomListStyle = styled.div`
   &.roomlist {
     display: flex;
-    margin: 100px 0px;
+    margin: 100px auto;
     gap: 25px;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+
+    max-width: 1280px;
+    width: 100%;
+
     a {
       text-decoration: none;
     }
+    .feature-room-wrapper {
+      max-width: calc(100% / 3 - 25px);
+    }
     .featured-room {
       box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.07);
+
       &:hover {
         img {
           transition: 0.5s all ease-in-out;
