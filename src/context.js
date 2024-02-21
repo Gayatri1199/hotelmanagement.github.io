@@ -64,19 +64,23 @@ const RoomProvider = ({ children }) => {
     setRoomsData(filteredRooms);
   };
 
-  const handlePriceRange = (value) => {
-    setpriceRangeFilter(value);
+  const handlePriceRange = (e) => {
+    setpriceRangeFilter(e.target.value);
+
+    const filterData = roomsData.filter((item) => item.price >= e.target.value);
+    console.log("RoomsData Value ==>", roomsData);
+    setFilteredProducts(filterData);
     console.log("handlePriceRange has been called!!", priceRangeFilter);
-    console.log("Rooms from handle price function", rooms);
-    const filtered = rooms.filter((room) => room.price >= 600);
-    console.log("Handle PRice Range Filter Product == >", filtered);
+    // console.log("Rooms from handle price function", rooms);
+    // const filtered = rooms.filter((room) => room.price >= 600);
+    // console.log("Handle PRice Range Filter Product == >", filtered);
   };
 
   return (
     <RoomContext.Provider
       value={{
         rooms: filteredProducts ? filteredProducts : rooms,
-        sortedRooms: roomsData,
+        sortedRooms: filteredProducts ? filteredProducts : roomsData,
         featuredRoom,
         loading: false,
         getRoom,

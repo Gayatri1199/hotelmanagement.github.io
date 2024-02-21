@@ -20,8 +20,10 @@ const RoomFilter = ({ rooms }) => {
     pets,
     handlePriceRange,
     priceRange,
+    priceRangeFilter,
   } = useContext(RoomContext);
   const [roomType, setRoomType] = useState("all");
+  const [roomCapacity, setroomCapacity] = useState("all");
 
   let types = getUnique(rooms, "type");
   types = ["all", ...types];
@@ -34,6 +36,18 @@ const RoomFilter = ({ rooms }) => {
     );
   });
   console.log({ roomType }, type);
+
+  let people = getUnique(rooms, "capacity");
+  people = ["all", ...people];
+  // console.log("Types==>", types);
+  people = people.map((item, index) => {
+    return (
+      <option value={item} key={index}>
+        {item}
+      </option>
+    );
+  });
+  console.log("PEOPLE==>", people);
 
   return (
     <RoomFilterStyle>
@@ -55,17 +69,32 @@ const RoomFilter = ({ rooms }) => {
             </select>
           </div>
           <div className="form-group ">
-            <label htmlFor="price">Room Price ${price}</label>
+            <label htmlFor="price">Room Price $0 - ${priceRangeFilter}</label>
             <input
               type="range"
               name="price"
-              min={minPrice}
+              min="0"
               max={maxPrice}
               id="price"
-              value={price}
+              value={priceRangeFilter}
               onChange={handlePriceRange}
               className="price-stripe"
             />
+          </div>
+          <div className="form-group">
+            <label htmlFor="type">Guest</label>
+            <select
+              name="capacity"
+              id="capacity"
+              value={roomCapacity}
+              className="form-control"
+              onChange={(e) => {
+                setroomCapacity(e.target.value);
+                handleChange(e);
+              }}
+            >
+              {people}
+            </select>
           </div>
         </form>
       </div>
