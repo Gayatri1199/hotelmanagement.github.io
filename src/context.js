@@ -15,8 +15,8 @@ const RoomContext = React.createContext({
   maxPrice: 0,
   maxSize: 0,
   minSize: 0,
-  breakfast: false,
-  pets: false,
+  breakfast: true,
+  pets: true,
 });
 
 const formatData = (items) => {
@@ -46,6 +46,7 @@ const filterRooms = (filterData) => {
 let maxPrice = Math.max(...rooms.map((item) => item.price));
 let minPrice = Math.min(...rooms.map((item) => item.price));
 let maxSize = Math.max(...rooms.map((item) => item.size));
+let minSize = Math.min(...rooms.map((item) => item.size));
 
 const RoomProvider = ({ children }) => {
   const [roomsData, setRoomsData] = useState(rooms);
@@ -54,13 +55,19 @@ const RoomProvider = ({ children }) => {
     maxPrice,
   ]);
   const [filteredProducts, setFilteredProducts] = useState(rooms);
+  const [filteredProductsPrice, setfilteredProductsPrice] = useState(rooms);
 
   const handleChange = (event) => {
     if (event.target.value === "all") {
       setRoomsData(rooms);
       return;
     }
-    const filteredRooms = filterRooms(event.target.value);
+    const filteredRooms = filterRooms(event.target.value); //Here we are filtering the rooms with the mentioned filterRooms function based on the value we are getting!
+    setRoomsData(filteredRooms);
+  };
+
+  const handleChangeForGuest = (event) => {
+    const filteredRooms = filterRooms(event.target.value); //Here we are filtering the rooms with the mentioned filterRooms function based on the value we are getting!
     setRoomsData(filteredRooms);
   };
 
@@ -69,18 +76,44 @@ const RoomProvider = ({ children }) => {
 
     const filterData = roomsData.filter((item) => item.price >= e.target.value);
     console.log("RoomsData Value ==>", roomsData);
-    setFilteredProducts(filterData);
+    // setfilteredProductsPrice(filterData);
+    setRoomsData(filterData);
     console.log("handlePriceRange has been called!!", priceRangeFilter);
     // console.log("Rooms from handle price function", rooms);
     // const filtered = rooms.filter((room) => room.price >= 600);
     // console.log("Handle PRice Range Filter Product == >", filtered);
   };
 
+  const handleChangeSize = (e) => {
+    setpriceRangeFilter(e.target.value);
+    console.log("Value from handleChangeSize", e.target.value);
+    const filterData = roomsData.filter(
+      (item) => item.size >= minSize && item.size <= maxSize
+    );
+    console.log("RoomsData Value ==>", roomsData);
+    // setfilteredProductsPrice(filterData);
+    setRoomsData(filterData);
+    console.log("handlePriceRange has been called!!", priceRangeFilter);
+    // console.log("Rooms from handle price function", rooms);
+    // const filtered = rooms.filter((room) => room.price >= 600);
+    // console.log("Handle PRice Range Filter Product == >", filtered);
+  };
+
+  // if (breakfast) {
+  //   const filterData = roomsData.filter((item) => item.breakfast === true);
+  //   setRoomsData(filterData);
+  // }
+
+  // if (pets) {
+  //   const filterData = roomsData.filter((item) => item.pets === true);
+  //   setRoomsData(filterData);
+  // }
+
   return (
     <RoomContext.Provider
       value={{
         rooms: filteredProducts ? filteredProducts : rooms,
-        sortedRooms: filteredProducts ? filteredProducts : roomsData,
+        sortedRooms: roomsData,
         featuredRoom,
         loading: false,
         getRoom,
@@ -93,6 +126,10 @@ const RoomProvider = ({ children }) => {
         handlePriceRange,
         setpriceRangeFilter,
         priceRangeFilter,
+        handleChangeForGuest,
+        breakfast: true,
+        pets: true,
+        handleChangeSize,
       }}
     >
       {children}
