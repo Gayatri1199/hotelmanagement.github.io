@@ -3,6 +3,12 @@ import Room from "./Room";
 import styled from "styled-components";
 
 const RoomListStyle = styled.div`
+  height: 100vh;
+  &.empty-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   &.roomlist {
     display: flex;
     margin: 100px auto;
@@ -136,9 +142,9 @@ const RoomListStyle = styled.div`
 const RoomList = ({ rooms }) => {
   if (rooms.length === 0) {
     return (
-      <div className="empty-search">
+      <RoomListStyle className="empty-search">
         <h1>NO rooms are available as per your search!!!!</h1>
-      </div>
+      </RoomListStyle>
     );
   }
   return (
