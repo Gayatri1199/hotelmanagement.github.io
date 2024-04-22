@@ -31,10 +31,15 @@ const ServicesStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     .service {
-      width: calc(50% - 130px);
+      width: 100%;
       display: flex;
       padding: 50px 50px 50px 70px;
       align-items: center;
+      justify-content: center;
+      @media screen and (min-width: 1261px) {
+        width: calc(50% - 130px);
+        justify-content: unset;
+      }
       .icon {
         min-width: 140px;
         height: 140px;

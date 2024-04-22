@@ -64,6 +64,16 @@ const RoomProvider = ({ children }) => {
     }
     const filteredRooms = filterRooms(event.target.value); //Here we are filtering the rooms with the mentioned filterRooms function based on the value we are getting!
     setRoomsData(filteredRooms);
+
+    if (event.target.value) {
+      const filterData = roomsData.filter((item) => item.breakfast === true);
+      setRoomsData(filterData);
+    }
+
+    if (event.target.value) {
+      const filterData = roomsData.filter((item) => item.pets === true);
+      setRoomsData(filterData);
+    }
   };
 
   const handleChangeForGuest = (event) => {
@@ -127,7 +137,7 @@ const RoomProvider = ({ children }) => {
         setpriceRangeFilter,
         priceRangeFilter,
         handleChangeForGuest,
-        breakfast: true,
+        breakfast: false,
         pets: true,
         handleChangeSize,
       }}

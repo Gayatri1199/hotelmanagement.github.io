@@ -63,11 +63,16 @@ position:relative;
   .content{
     font-family:'Cardo', serif;
     font-weight:bold;
-    font-size:80px;
+    font-size:50px;
     color:#ffffff;
-    margin-bottom:50px;
+    margin-bottom:20px;
     text-transform:uppercase;
     letter-spacing:0.55px;
+
+    @media screen and (min-width:1261px){
+      font-size:80px;
+      margin-bottom:50px;
+    }
   }
 
 }

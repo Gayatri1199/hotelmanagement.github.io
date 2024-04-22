@@ -7,11 +7,16 @@ const AboutStyle = styled.div`
   max-width: 1170px;
   width: 100%;
   margin: 100px auto 0;
+  padding:0px 32px;
 
   .upper-section {
-    display: flex;
+   
     gap: 50px;
     margin-bottom: 0px;
+
+    @media screen and (min-width:1261px){
+      display: flex;
+    }
 
     .left-section {
       position: relative;
@@ -57,8 +62,11 @@ const AboutStyle = styled.div`
     }
   }
   .lower-section {
-    display: flex;
+    
     gap: 50px;
+    @media screen and (min-width:1261px){
+      display: flex;
+    }
 
     .content {
       max-width: 350px;
